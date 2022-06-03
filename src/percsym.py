@@ -113,7 +113,9 @@ def isObjectMoving(objName, symbolContext, frame, w):
 
 def isRobotMoving(robName, symbolContext, frame, w):
     retq = None
-    baseActuatorVelocity = w.getBodyProperty((robName, 'fn'), 'baseactuatorvelocity')
+    if (robName not in frame) or ('leftWheelVelocity' not in frame[robName]) or ('rightWheelVelocity' not in frame[robName]):
+        return None
+    baseActuatorVelocity = (frame[robName]['leftWheelVelocity'] + frame[robName]['rightWheelVelocity'])*0.5
     if None != baseActuatorVelocity:
         threshold = 0
         if "baseActuatorVelocityThreshold" in symbolContext:
