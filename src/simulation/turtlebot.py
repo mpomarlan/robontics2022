@@ -8,7 +8,7 @@ scenario = 0
 if 2 <= len(sys.argv):
     scenario = int(sys.argv[1])
 
-outfileName = 'out.log'
+outfileName = 'out.frame'
 if 3 <= len(sys.argv):
     outfileName = str(sys.argv[2])
 
