@@ -95,8 +95,8 @@ def isObjectMoving(objName, symbolContext, frame, w):
     relataStill = list(set(relataStill))
     absoluteMovement = False
     objVel = None
-    if (objName in frame) and ('velocity' in frame[objName]):
-        objVel = frame[objName]['velocity']
+    if (objName in frame) and ('linearVelocity' in frame[objName]):
+        objVel = frame[objName]['linearVelocity']
     if None == objVel:
         return None
     absoluteMovement = (0 < abs(norm(objVel)))
@@ -149,8 +149,8 @@ def crossProduct(a, b):
 def checkFalling(objName, symbolContext, frame, w)
     if objName not in frame:
         return None
-    teeVel = frame[objName]['velocity']
-    return (0 <= teeVel[2])
+    teeVel = frame[objName]['linearVelocity']
+    return (0 <= abs(teeVel[2]))
 
 def belowApproximateGeometry(contact, approxGeometry):
     point = contact['point']
