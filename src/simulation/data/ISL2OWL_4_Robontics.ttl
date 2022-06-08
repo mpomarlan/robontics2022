@@ -1,0 +1,866 @@
+@prefix : <http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics> .
+
+<http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics> rdf:type owl:Ontology ;
+                                                                        owl:versionInfo """---- Version 1.1 - 05.06.2022 ----
+
+Added the BLOCKED_MOVEMENT situation. To be tested.
+
+
+---- Version 1.0 - 01.06.2022 ----
+
+This is the ontological module to allow image-schematic reasoning in the action-perception loop for robotic agents.
+It is modeled starting from ISL2OWL, available here:
+https://github.com/StenDoipanni/ISAAC/tree/main/ISL2OWL
+which in turn is modeled starting from ISL (Image Schema Logic) 
+[Hedblom, Maria M., et al. \"Image schema combinations and complex events.\" KI-Künstliche Intelligenz 33.3 (2019): 279-291.]
+
+Designed by Stefano De Giorgis.""" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_ON_PATH_TOWARD#onPathToward
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_ON_PATH_TOWARD#onPathToward> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#contained
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#contained> rdf:type owl:ObjectProperty ;
+                                                                                     rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PP> ;
+                                                                                     rdfs:domain <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> ,
+                                                                                                 [ rdf:type owl:Class ;
+                                                                                                   owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                 <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                               )
+                                                                                                 ] ;
+                                                                                     rdfs:range <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#CONTAINER> ,
+                                                                                                [ rdf:type owl:Class ;
+                                                                                                  owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                              )
+                                                                                                ] .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#containedIn
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#containedIn> rdf:type owl:ObjectProperty ;
+                                                                                       rdfs:domain <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> ;
+                                                                                       rdfs:range <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#CONTAINER> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#isTheInsideOf
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#isTheInsideOf> rdf:type owl:ObjectProperty .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#DC
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#DC> rdf:type owl:ObjectProperty ;
+                                                                                     owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#DC> ;
+                                                                                     rdf:type owl:SymmetricProperty ;
+                                                                                     rdfs:domain [ rdf:type owl:Class ;
+                                                                                                   owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                 <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                               )
+                                                                                                 ] ;
+                                                                                     rdfs:range [ rdf:type owl:Class ;
+                                                                                                  owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                              )
+                                                                                                ] ;
+                                                                                     owl:propertyDisjointWith <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC> ,
+                                                                                                              <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EQ> ,
+                                                                                                              <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#NTTP> ,
+                                                                                                              <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#NTTPi> ,
+                                                                                                              <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PO> ,
+                                                                                                              <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#TPP> ,
+                                                                                                              <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#TPPi> ;
+                                                                                     rdfs:comment "RCC8: Disconnected." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC> rdf:type owl:ObjectProperty ;
+                                                                                     owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC> ;
+                                                                                     rdf:type owl:SymmetricProperty ;
+                                                                                     rdfs:domain [ rdf:type owl:Class ;
+                                                                                                   owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                 <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                               )
+                                                                                                 ] ;
+                                                                                     rdfs:range [ rdf:type owl:Class ;
+                                                                                                  owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                              )
+                                                                                                ] ;
+                                                                                     rdfs:comment "RCC8: Externally Connected. (Tangent)" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EQ
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EQ> rdf:type owl:ObjectProperty ;
+                                                                                     owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EQ> ;
+                                                                                     rdf:type owl:SymmetricProperty ,
+                                                                                              owl:ReflexiveProperty ;
+                                                                                     rdfs:domain [ rdf:type owl:Class ;
+                                                                                                   owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                 <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                               )
+                                                                                                 ] ;
+                                                                                     rdfs:range [ rdf:type owl:Class ;
+                                                                                                  owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                              )
+                                                                                                ] ;
+                                                                                     rdfs:comment "RCC8: Equivalent." ;
+                                                                                     owl:deprecated "true"^^xsd:boolean .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#NTTP
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#NTTP> rdf:type owl:ObjectProperty ;
+                                                                                       rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PP> ;
+                                                                                       owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#NTTPi> ;
+                                                                                       rdf:type owl:AsymmetricProperty ;
+                                                                                       rdfs:domain [ rdf:type owl:Class ;
+                                                                                                     owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                   <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                 )
+                                                                                                   ] ;
+                                                                                       rdfs:range [ rdf:type owl:Class ;
+                                                                                                    owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                  <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                )
+                                                                                                  ] ;
+                                                                                       rdfs:comment """RCC8: Non-Tangential Proper Part. (X is subset of Y and it is non tangential to the border of Y)
+
+X NTTP Y""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#NTTPi
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#NTTPi> rdf:type owl:ObjectProperty ;
+                                                                                        rdfs:subPropertyOf [ owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PP>
+                                                                                                           ] ;
+                                                                                        rdf:type owl:AsymmetricProperty ;
+                                                                                        rdfs:domain [ rdf:type owl:Class ;
+                                                                                                      owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                    <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                  )
+                                                                                                    ] ;
+                                                                                        rdfs:range [ rdf:type owl:Class ;
+                                                                                                     owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                   <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                 )
+                                                                                                   ] ;
+                                                                                        rdfs:comment """RCC8: Non-Tangential Proper Part Inverse. (Y is subset of X and it is non tangential to the border of X)
+
+X NTTPi Y""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PO
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PO> rdf:type owl:ObjectProperty ;
+                                                                                     owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PO> ;
+                                                                                     rdf:type owl:SymmetricProperty ;
+                                                                                     rdfs:domain [ rdf:type owl:Class ;
+                                                                                                   owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                 <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                               )
+                                                                                                 ] ;
+                                                                                     rdfs:range [ rdf:type owl:Class ;
+                                                                                                  owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                              )
+                                                                                                ] ;
+                                                                                     rdfs:comment "RCC8: Partially Overlapping. (Intersection)" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PP
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PP> rdf:type owl:ObjectProperty ,
+                                                                                              owl:AsymmetricProperty ;
+                                                                                     rdfs:domain <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> ;
+                                                                                     rdfs:range <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> ;
+                                                                                     rdfs:comment "Proper Part." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#TPP
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#TPP> rdf:type owl:ObjectProperty ;
+                                                                                      rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PP> ;
+                                                                                      owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#TPPi> ;
+                                                                                      rdf:type owl:AsymmetricProperty ;
+                                                                                      rdfs:domain [ rdf:type owl:Class ;
+                                                                                                    owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                  <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                )
+                                                                                                  ] ;
+                                                                                      rdfs:range [ rdf:type owl:Class ;
+                                                                                                   owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                 <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                               )
+                                                                                                 ] ;
+                                                                                      rdfs:comment """RCC8: Tangential Proper Part. (X is subset of Y and is tangent to the border of Y)
+
+X TPP Y""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#TPPi
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#TPPi> rdf:type owl:ObjectProperty ;
+                                                                                       rdfs:subPropertyOf [ owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PP>
+                                                                                                          ] ;
+                                                                                       rdf:type owl:AsymmetricProperty ;
+                                                                                       rdfs:domain [ rdf:type owl:Class ;
+                                                                                                     owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                   <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                 )
+                                                                                                   ] ;
+                                                                                       rdfs:range [ rdf:type owl:Class ;
+                                                                                                    owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path>
+                                                                                                                  <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                )
+                                                                                                  ] ;
+                                                                                       rdfs:comment """RCC8: Tangential Proper Part inverse. (Y is subset of X and it is tangential to the border of X)
+
+X TPPi Y""" .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#above
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#above> rdf:type owl:ObjectProperty ;
+                                                                                        owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#below> ;
+                                                                                        rdfs:domain [ rdf:type owl:Class ;
+                                                                                                      owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                    <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                  )
+                                                                                                    ] ;
+                                                                                        rdfs:range [ rdf:type owl:Class ;
+                                                                                                     owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                   <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                 )
+                                                                                                   ] ;
+                                                                                        rdfs:comment "Cardinal Direction." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#awayFrom
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#awayFrom> rdf:type owl:ObjectProperty ;
+                                                                                           rdfs:domain [ rdf:type owl:Class ;
+                                                                                                         owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                       <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT>
+                                                                                                                     )
+                                                                                                       ] ;
+                                                                                           rdfs:range <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> ;
+                                                                                           owl:propertyDisjointWith <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#towards> ;
+                                                                                           rdfs:comment "QTC property: one Object is (or its position changes having as a result the Object being) awayFrom some Region." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#back
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#back> rdf:type owl:ObjectProperty ;
+                                                                                       owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#front> ;
+                                                                                       rdfs:domain [ rdf:type owl:Class ;
+                                                                                                     owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                   <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                 )
+                                                                                                   ] ;
+                                                                                       rdfs:range [ rdf:type owl:Class ;
+                                                                                                    owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                  <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                )
+                                                                                                  ] ;
+                                                                                       rdfs:comment "Cardinal Direction." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#below
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#below> rdf:type owl:ObjectProperty ;
+                                                                                        rdfs:domain [ rdf:type owl:Class ;
+                                                                                                      owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                    <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                  )
+                                                                                                    ] ;
+                                                                                        rdfs:range [ rdf:type owl:Class ;
+                                                                                                     owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                   <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                 )
+                                                                                                   ] ;
+                                                                                        rdfs:comment "Cardinal Direction." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#front
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#front> rdf:type owl:ObjectProperty ;
+                                                                                        rdfs:domain [ rdf:type owl:Class ;
+                                                                                                      owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                    <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                  )
+                                                                                                    ] ;
+                                                                                        rdfs:range [ rdf:type owl:Class ;
+                                                                                                     owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                   <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                 )
+                                                                                                   ] ;
+                                                                                        rdfs:comment "Cardinal Direction." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#left
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#left> rdf:type owl:ObjectProperty ;
+                                                                                       owl:inverseOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#right> ;
+                                                                                       rdfs:domain [ rdf:type owl:Class ;
+                                                                                                     owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                   <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                 )
+                                                                                                   ] ;
+                                                                                       rdfs:range [ rdf:type owl:Class ;
+                                                                                                    owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                  <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                )
+                                                                                                  ] ;
+                                                                                       rdfs:comment "Cardinal Direction." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#locatedIn
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#locatedIn> rdf:type owl:ObjectProperty ;
+                                                                                            rdfs:domain <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object> ,
+                                                                                                        <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> ;
+                                                                                            rdfs:range <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#right
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#right> rdf:type owl:ObjectProperty ;
+                                                                                        rdfs:domain [ rdf:type owl:Class ;
+                                                                                                      owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                    <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                  )
+                                                                                                    ] ;
+                                                                                        rdfs:range [ rdf:type owl:Class ;
+                                                                                                     owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                   <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                 )
+                                                                                                   ] ;
+                                                                                        rdfs:comment "Cardinal Direction." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#stableDistance
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#stableDistance> rdf:type owl:ObjectProperty ;
+                                                                                                 rdfs:domain <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object> ;
+                                                                                                 rdfs:range <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> ;
+                                                                                                 rdfs:comment "QTC property: it is referred to the change of distance between an Object and a Region, the two could both be moving but the distance between them is constant." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#towards
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#towards> rdf:type owl:ObjectProperty ;
+                                                                                          rdfs:domain <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object> ,
+                                                                                                      <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> ;
+                                                                                          rdfs:range <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> ,
+                                                                                                     <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#GOAL> ;
+                                                                                          rdfs:comment "QTC property: one Object is (or its position changes having as a result the Object being) towards some Region." .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> rdf:type owl:ObjectProperty ;
+                                                                       owl:inverseOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#blockedBy
+:blockedBy rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC> ;
+           owl:inverseOf :blocks ;
+           rdfs:domain <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKED> ;
+           rdfs:range <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKER> .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#blocks
+:blocks rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC> ;
+        rdfs:domain <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKER> ;
+        rdfs:range <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKED> .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#supportedBy
+:supportedBy rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC> ,
+                                <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#above> ;
+             owl:inverseOf :supports ;
+             rdfs:domain <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTEE> ;
+             rdfs:range <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTER> .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#supports
+:supports rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC> ,
+                             <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#below> ;
+          rdfs:domain <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTER> ;
+          rdfs:range <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTEE> .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#beingCrossedBy
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#beingCrossedBy> rdf:type owl:ObjectProperty ;
+                                                                                                     owl:inverseOf <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#crossing> ;
+                                                                                                     rdfs:domain [ rdf:type owl:Class ;
+                                                                                                                   owl:unionOf ( <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Border>
+                                                                                                                                 <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Opening>
+                                                                                                                               )
+                                                                                                                 ] ;
+                                                                                                     rdfs:range <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object> ;
+                                                                                                     rdfs:comment "Some Border or Opening is crossed by some Object." .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#boundedBy
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#boundedBy> rdf:type owl:ObjectProperty ;
+                                                                                                owl:inverseOf <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#bounds> ;
+                                                                                                rdfs:domain <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> ;
+                                                                                                rdfs:range <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Border> ;
+                                                                                                rdfs:comment "Some Region is bounded by some Border." .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#bounds
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#bounds> rdf:type owl:ObjectProperty ;
+                                                                                             rdfs:domain <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Border> ;
+                                                                                             rdfs:range <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> ;
+                                                                                             rdfs:comment "Some Border bounds some Region." .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#crossing
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#crossing> rdf:type owl:ObjectProperty ;
+                                                                                               rdfs:subPropertyOf owl:topObjectProperty ;
+                                                                                               rdfs:domain <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object> ;
+                                                                                               rdfs:range [ rdf:type owl:Class ;
+                                                                                                            owl:unionOf ( <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Border>
+                                                                                                                          <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Opening>
+                                                                                                                        )
+                                                                                                          ] ;
+                                                                                               owl:propertyChainAxiom ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#PO>
+                                                                                                                        <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#boundedBy>
+                                                                                                                      ) ;
+                                                                                               rdfs:comment "Some Object crosses some Border or Opening." .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#goingThrough
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#goingThrough> rdf:type owl:ObjectProperty ;
+                                                                                                   rdfs:subPropertyOf <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#crossing> ,
+                                                                                                                      [ owl:inverseOf <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#beingCrossedBy>
+                                                                                                                      ] ;
+                                                                                                   rdfs:domain <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object> ,
+                                                                                                               <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> ;
+                                                                                                   rdfs:range <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> ;
+                                                                                                   rdfs:comment "Some Object moves through some Region. In the original definition (Hedblom 2020) it is meant to consider also temporality, starting at some source before some region, moving through the path in some region and reaching some goal outside of the aforementioned region. The simplest version of this relation is here modeled, without considering any temporality but only implying that some Object has crossed some Opening or Border to move through some Region." .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_GOING_IN.owl#goingIn
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_GOING_IN.owl#goingIn> rdf:type owl:ObjectProperty ;
+                                                                                      rdfs:subPropertyOf <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF.owl#outOf> ;
+                                                                                      rdfs:domain <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object> ,
+                                                                                                  <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> ;
+                                                                                      rdfs:range <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> ;
+                                                                                      rdfs:comment "Some Object which is out of some Region or Object is going into it." .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_GOING_OUT.owl#goingOut
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_GOING_OUT.owl#goingOut> rdf:type owl:ObjectProperty ;
+                                                                                        rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#containedIn> ;
+                                                                                        rdfs:domain <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object> ,
+                                                                                                    <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> ;
+                                                                                        rdfs:range <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> ,
+                                                                                                   <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#INSIDE> ;
+                                                                                        rdfs:comment "Some Object which is contained in some Object or Region is going out of it." .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_ON_PATH_FROM.owl#onPathFrom
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_ON_PATH_FROM.owl#onPathFrom> rdf:type owl:ObjectProperty ;
+                                                                                             rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#awayFrom> ,
+                                                                                                                <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF#outOf> ;
+                                                                                             rdfs:domain <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> ;
+                                                                                             rdfs:range <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE> ,
+                                                                                                        [ rdf:type owl:Class ;
+                                                                                                          owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                        <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                      )
+                                                                                                        ] .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_ON_PATH_TOWARD.owl#onPathToward
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_ON_PATH_TOWARD.owl#onPathToward> rdf:type owl:ObjectProperty ;
+                                                                                                 rdfs:subPropertyOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#towards> ,
+                                                                                                                    <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF#outOf> ;
+                                                                                                 rdfs:domain <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> ,
+                                                                                                             [ rdf:type owl:Class ;
+                                                                                                               owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                             <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                           )
+                                                                                                             ] ;
+                                                                                                 rdfs:range <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#GOAL> .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF#outOf
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF#outOf> rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF.owl#isTheOutsideOf
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF.owl#isTheOutsideOf> rdf:type owl:ObjectProperty ,
+                                                                                                        owl:AsymmetricProperty ,
+                                                                                                        owl:IrreflexiveProperty ;
+                                                                                               rdfs:domain <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF.owl#Outside> ;
+                                                                                               rdfs:range [ rdf:type owl:Class ;
+                                                                                                            owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                          <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                        )
+                                                                                                          ] ;
+                                                                                               rdfs:comment "Some Outside is the outside of some Object or Region." .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF.owl#outOf
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF.owl#outOf> rdf:type owl:ObjectProperty ;
+                                                                                      rdfs:domain [ rdf:type owl:Class ;
+                                                                                                    owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                  <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                )
+                                                                                                  ] ;
+                                                                                      rdfs:range [ rdf:type owl:Class ;
+                                                                                                   owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                 <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                               )
+                                                                                                 ] ;
+                                                                                      owl:propertyChainAxiom ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#DC>
+                                                                                                               <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#isTheInsideOf>
+                                                                                                             ) ,
+                                                                                                             ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC>
+                                                                                                               <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#isTheInsideOf>
+                                                                                                             ) ;
+                                                                                      rdfs:comment "Some Object or Region is outside of some other Object or Region." .
+
+
+###  http://www.w3.org/2002/07/owl#topObjectProperty
+owl:topObjectProperty rdf:type owl:ObjectProperty ;
+                      owl:inverseOf owl:topObjectProperty ;
+                      rdf:type owl:SymmetricProperty ,
+                               owl:TransitiveProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#Inside
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_CONTAINMENT.owl#Inside> rdf:type owl:Class ;
+                                                                                  rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object> rdf:type owl:Class ;
+                                                                                         owl:equivalentClass <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> ,
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#locatedIn> ;
+                                                                                                               owl:someValuesFrom <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                             ] ;
+                                                                                         rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Path> rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region
+<http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event> rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> rdf:type owl:Class .
+
+
+###  http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation
+<http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKAGE
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKAGE> rdf:type owl:Class ;
+                                                                                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                        owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                                                                                                        owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKED>
+                                                                                                      ] ,
+                                                                                                      [ rdf:type owl:Restriction ;
+                                                                                                        owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                                                                                                        owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKER>
+                                                                                                      ] ;
+                                                                                  rdfs:subClassOf :CONTACT .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKED
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKED> rdf:type owl:Class ;
+                                                                                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                       owl:onProperty :blockedBy ;
+                                                                                                       owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKER>
+                                                                                                     ] ;
+                                                                                 rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> ,
+                                                                                                 [ owl:intersectionOf ( owl:Thing
+                                                                                                                        [ rdf:type owl:Restriction ;
+                                                                                                                          owl:onProperty <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_ON_PATH_TOWARD.owl#onPathToward> ;
+                                                                                                                          owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#GOAL>
+                                                                                                                        ]
+                                                                                                                      ) ;
+                                                                                                   rdf:type owl:Class
+                                                                                                 ] ,
+                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> ;
+                                                                                                   owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKAGE>
+                                                                                                 ] .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKER
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKER> rdf:type owl:Class ;
+                                                                                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                       owl:onProperty :blocks ;
+                                                                                                       owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKED>
+                                                                                                     ] ;
+                                                                                 rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> ,
+                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                   owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> ;
+                                                                                                   owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKAGE>
+                                                                                                 ] .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#CONTAINER
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#CONTAINER> rdf:type owl:Class ;
+                                                                                   rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> ,
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> ;
+                                                                                                     owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#CONTAINMENT>
+                                                                                                   ] .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#CONTAINMENT
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#CONTAINMENT> rdf:type owl:Class ;
+                                                                                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                           owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                                                                                                           owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#CONTAINER>
+                                                                                                         ] ,
+                                                                                                         [ rdf:type owl:Restriction ;
+                                                                                                           owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                                                                                                           owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#INSIDE>
+                                                                                                         ] ;
+                                                                                     rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event> ,
+                                                                                                     <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#GOAL
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#GOAL> rdf:type owl:Class ;
+                                                                              rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> ,
+                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> ;
+                                                                                                owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE_PATH_GOAL>
+                                                                                              ] .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#INSIDE
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#INSIDE> rdf:type owl:Class ;
+                                                                                rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> ,
+                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                  owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> ;
+                                                                                                  owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#CONTAINMENT>
+                                                                                                ] .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#OBJECT> rdf:type owl:Class ;
+                                                                                rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> ;
+                                                                                rdfs:comment "This is an interesting case, OBJECT is often intended as an IS on its own, but it may be used here also as dul:Role only. Let's see how it behaves in a use case scenario." .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#PATH
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#PATH> rdf:type owl:Class ;
+                                                                              rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> ,
+                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> ;
+                                                                                                owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE_PATH_GOAL>
+                                                                                              ] .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE> rdf:type owl:Class ;
+                                                                                rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> ,
+                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                  owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> ;
+                                                                                                  owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE_PATH_GOAL>
+                                                                                                ] .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE_PATH_GOAL
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE_PATH_GOAL> rdf:type owl:Class ;
+                                                                                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                                                                                                                owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#GOAL>
+                                                                                                              ] ,
+                                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                                                                                                                owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#PATH>
+                                                                                                              ] ,
+                                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                                                                                                                owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE>
+                                                                                                              ] ;
+                                                                                          rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event> ,
+                                                                                                          <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> ;
+                                                                                          rdfs:comment "Considered here always in its dynamic form (MOVEMENT_OF_AN_OBJECT)." .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORT
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORT> rdf:type owl:Class ;
+                                                                                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                       owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                                                                                                       owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTEE>
+                                                                                                     ] ,
+                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                       owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                                                                                                       owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTER>
+                                                                                                     ] ;
+                                                                                 rdfs:subClassOf :CONTACT .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTEE
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTEE> rdf:type owl:Class ;
+                                                                                   owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                         owl:onProperty :supportedBy ;
+                                                                                                         owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTER>
+                                                                                                       ] ;
+                                                                                   rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> ,
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#above> ;
+                                                                                                     owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTER>
+                                                                                                   ] ,
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> ;
+                                                                                                     owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORT>
+                                                                                                   ] .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTER
+<http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTER> rdf:type owl:Class ;
+                                                                                   owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                         owl:onProperty :supports ;
+                                                                                                         owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTEE>
+                                                                                                       ] ;
+                                                                                   rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Role> ,
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#below> ;
+                                                                                                     owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORTEE>
+                                                                                                   ] ,
+                                                                                                   [ rdf:type owl:Restriction ;
+                                                                                                     owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> ;
+                                                                                                     owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SUPPORT>
+                                                                                                   ] .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#BLOCKED_MOVEMENT
+:BLOCKED_MOVEMENT rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE_PATH_GOAL>
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                                                               owl:someValuesFrom <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#BLOCKER>
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE_PATH_GOAL> ;
+                  rdfs:comment """It is called generically \"BLOCKED_MOVEMENT\" due to the fact that we can have three types (plus all the combinations and iterations) of blocked movement.
+e.g. 
+1. an \"escaping from prison\" situation is a BLOCKED_MOVEMENT which has it BLOCKAGE situation localized mainly on its SOURCE.
+2. \"a fallen bridge between two cities\" is a BLOCKED_MOVEMENT which has its BLOCKAGE situatione localized on the PATH.
+3. \"going to some store and finding it closed\" is a situation which has a BLOCKAGE situation localized on its GOAL.""" .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#CONTACT
+:CONTACT rdf:type owl:Class ;
+         owl:equivalentClass [ rdf:type owl:Restriction ;
+                               owl:onProperty <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> ;
+                               owl:someValuesFrom [ owl:intersectionOf ( owl:Thing
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#EC> ;
+                                                                           owl:someValuesFrom owl:Thing
+                                                                         ]
+                                                                       ) ;
+                                                    rdf:type owl:Class
+                                                  ]
+                             ] ;
+         rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Event> ,
+                         <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Situation> .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Border
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Border> rdf:type owl:Class ;
+                                                                                             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                                                   owl:onProperty <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#bounds> ;
+                                                                                                                   owl:someValuesFrom <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                 ] ;
+                                                                                             rdfs:subClassOf <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region> .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Opening
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Opening> rdf:type owl:Class ;
+                                                                                              rdfs:subClassOf <http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_CROSSING_OPENING.owl#Border> .
+
+
+###  http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF.owl#Outside
+<http://www.semanticweb.org/sten-doipanni/ontologies/2021/5/ISL_OUTSIDE_OF.owl#Outside> rdf:type owl:Class ;
+                                                                                        rdfs:subClassOf [ rdf:type owl:Class ;
+                                                                                                          owl:unionOf ( <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Object>
+                                                                                                                        <http://www.ontologydesignpatterns.org/ont/ISL/2021/0/ISL_General_Vocabulary.owl#Region>
+                                                                                                                      )
+                                                                                                        ] ;
+                                                                                        rdfs:comment "An abstraction indicating the outside of some Object or Region." .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#a
+:a rdf:type owl:NamedIndividual ;
+   :supports :b .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#b
+:b rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#c
+:c rdf:type owl:NamedIndividual ;
+   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> :b .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#e
+:e rdf:type owl:NamedIndividual ;
+   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> :i ;
+   :blocks :f .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#f
+:f rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#g
+:g rdf:type owl:NamedIndividual ;
+   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> :e .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#h
+:h rdf:type owl:NamedIndividual ,
+            <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#SOURCE_PATH_GOAL> ;
+   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#hasParticipant> :e .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#i
+:i rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/sdg/ontologies/2022/5/ISL2OWL_4_Robontics#l
+:l rdf:type owl:NamedIndividual ,
+            <http://www.semanticweb.org/sdg/ontologies/2022/3/ISL2OWL_extension.owl#PATH> ;
+   <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#isParticipantIn> :i .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

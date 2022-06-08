@@ -1,0 +1,35 @@
+inContact(?X,?Y) => inContact(?Y,?X)
+-inContact(?X,?Y) => -inContact(?Y,?X)
+
+trajector(?S,?X) => hasParticipant(?S,?X)
+goal(?S,?X) => hasParticipant(?S,?X)
+blocker(?S,?X) => hasParticipant(?S,?X)
+blocked(?S,?X) => hasParticipant(?S,?X)
+
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), goal(?S,?O), about(?Q,?R) => isA(?Q,AskIsObjectMoving)
+
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), about(?Q,?R) => isA(?Q,AskIsBaseActuatorMoving)
+
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), goal(?S,?O), about(?Q,?R) => isA(?Q,AskIsObjectMovingTowards)
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), goal(?S,?O), about(?Q,?R) => hasTheme(?Q,?O)
+
+#isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), goal(?S,?O), about(?Q,?O) => isA(?Q,AskIsRegionFreeFor)
+#isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), goal(?S,?O), about(?Q,?O) => hasTheme(?Q,?R)
+
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), goal(?S,?O), about(?Q,?R) => isA(?Q,AskIsInSpatialRelation)
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), goal(?S,?O), about(?Q,?R) => hasMode(?Q,frontOf)
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), goal(?S,?O), about(?Q,?R) => hasRelatum(?Q,?R)
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), goal(?S,?O), about(?Q,?R) => hasPropertyName(?Q,forward)
+
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), inFrontOf(?O,?R), about(?Q,?R) => isA(?Q,AskIsInContact)
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), inFrontOf(?O,?R), about(?Q,?R) => hasTheme(?Q,?O)
+
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), isMovingBaseActuator(?R,?R), -isMoving(?R,?R) => isA(?S,BLOCKAGE)
+isA(?S,SOURCE_PATH_GOAL), trajector(?S,?R), isMovingBaseActuator(?R,?R), -isMoving(?R,?R) => blocked(?S,?R)
+isA(?S,BLOCKAGE), trajector(?S,?R), inContact(?R,?O), inFrontOf(?O,?R) => blocker(?S,?O)
+
+isA(?S,BLOCKAGE), blocked(?S,?R), blocker(?S,?O), about(?Q,?O) => isA(?Q,AskIsInSpatialRelation)
+isA(?S,BLOCKAGE), blocked(?S,?R), blocker(?S,?O), about(?Q,?O) => hasMode(?Q,frontOf)
+isA(?S,BLOCKAGE), blocked(?S,?R), blocker(?S,?O), about(?Q,?O) => hasRelatum(?Q,?R)
+isA(?S,BLOCKAGE), blocked(?S,?R), blocker(?S,?O), about(?Q,?O) => hasPropertyName(?Q,forward)
+
