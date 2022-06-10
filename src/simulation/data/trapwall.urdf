@@ -14,8 +14,8 @@
       <geometry>
 	<mesh filename="trapwall.obj" scale="1 1 1"/>
       </geometry>
-       <material name="white">
-        <color rgba="1 1 1 1"/>
+       <material name="green">
+        <color rgba="0 1 0 1"/>
       </material>
     </visual>
     <collision>

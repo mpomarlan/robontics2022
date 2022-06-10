@@ -16,8 +16,8 @@
         <!-- new mesh -->
         <mesh filename="turtlebot/kobuki_description/meshes/main_body.dae"/>
       </geometry>
-       <material name="orange">
-        <color rgba="1 0.5 0 1"/>
+       <material name="purple">
+        <color rgba="1 0 1 1"/>
       </material>
       <origin rpy="0 0 0" xyz="0.001 0 0.05199"/>
     </visual>
@@ -451,8 +451,8 @@
       <geometry>
         <mesh filename="turtlebot/turtlebot_description/meshes/stacks/hexagons/plate_bottom.dae"/>
       </geometry>
-       <material name="orange">
-        <color rgba="1 0.5 0 1"/>
+       <material name="purple">
+        <color rgba="1 0 1 1"/>
       </material>
     </visual>
     <collision>
@@ -574,8 +574,8 @@
       <geometry>
         <mesh filename="turtlebot/turtlebot_description/meshes/stacks/hexagons/plate_middle.dae"/>
       </geometry>
-       <material name="orange">
-        <color rgba="1 0.5 0 1"/>
+       <material name="purple">
+        <color rgba="1 0 1 1"/>
       </material>
     </visual>
     <collision>
@@ -747,8 +747,8 @@
       <geometry>
         <mesh filename="turtlebot/turtlebot_description/meshes/stacks/hexagons/plate_top.dae"/>
       </geometry>
-       <material name="orange">
-        <color rgba="1 0.5 0 1"/>
+       <material name="purple">
+        <color rgba="1 0 1 1"/>
       </material>
     </visual>
     <collision>

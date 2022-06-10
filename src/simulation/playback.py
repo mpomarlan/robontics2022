@@ -17,7 +17,7 @@ if 1 >= len(sys.argv):
 infileName = sys.argv[1]
 
 name2Id = {}
-name2URDF = {'turtle_1': 'turtlebot.urdf', 'turtle_2': 'turtlebot.urdf', 'plane': 'plane.urdf', 'enclosure': 'enclosure.urdf', 'orange_tile': 'orangetile.urdf', 'purple_tile': 'purpletile.urdf', 'wall1': 'wall.urdf', 'wall2': 'wall.urdf', 'trapwall1': 'trapwall.urdf', 'trapwall2': 'trapwall.urdf', 'box': 'box.urdf', 'ball': 'ball.urdf'}
+name2URDF = {'turtle_1': 'turtlebot.urdf', 'turtle_2': 'turtlebot_purple.urdf', 'plane': 'plane.urdf', 'enclosure': 'enclosure.urdf', 'orange_tile': 'orangetile.urdf', 'purple_tile': 'purpletile.urdf', 'wall1': 'wall.urdf', 'wall2': 'wall.urdf', 'trapwall1': 'trapwall.urdf', 'trapwall2': 'trapwall.urdf', 'box': 'box.urdf', 'ball': 'ball.urdf'}
 
 p.connect(p.GUI, options = "--opengl2")
 
@@ -82,6 +82,9 @@ w = {
 oldReport = {}
 priorTriples = []
 
+reportStrings = []
+dbgText = None
+
 for fnum, f in enumerate(frames):
     p.setGravity(0,0,-10)
     time.sleep(1./24.)
@@ -95,6 +98,16 @@ for fnum, f in enumerate(frames):
     repDiff = getReportDiff(oldReport, newReport)
     if repDiff:
         print("====\nFRAME %d:\n%s" % (fnum, repDiff))
+        reportStrings.append(repDiff)
+        if 5 < len(reportStrings):
+            reportStrings = reportStrings[-5:]
+            if None != dbgText:
+                p.removeUserDebugItem(dbgText)
+            daText = ""
+            for s in reportStrings:
+                daText = daText + s + "\n"
+            dbgText = p.addUserDebugText(daText, (-2,-2, 2), (0,0,0),1)
+            print(dbgText)
     oldReport = newReport
     priorTriples = postTriples
 

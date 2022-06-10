@@ -23,7 +23,7 @@ offsetPurple = [1.5,1.5,0.001]
 
 turtle = p.loadURDF("turtlebot.urdf",offset)
 id2Name[turtle] = 'turtle_1'
-turtle2 = p.loadURDF("turtlebot.urdf",offset2)
+turtle2 = p.loadURDF("turtlebot_purple.urdf",offset2)
 id2Name[turtle2] = 'turtle_2'
 plane = p.loadURDF("plane.urdf")
 id2Name[plane] = 'plane'
